@@ -243,7 +243,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 0/50
+Total stars: 0
+4/50
 Total time: 0ms
 ```
 
