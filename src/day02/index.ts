@@ -2,14 +2,14 @@ import run from "aocrunner";
 
 const parseInput = (rawInput: string) => rawInput;
 
-const isReportSorted: boolean = (report: string[]) => {
+const isReportSorted = (report: string[]) : boolean => {
   const ascending = report.slice(0).sort((a, b) => Number(a) - Number(b));
   const descending = report.slice(0).sort((a, b) => Number(b) - Number(a));
 
   return ascending.join(',') === report.join(',') || descending.join(',') === report.join(',');
 }
 
-const isGradual: boolean = (report: string[]) => {
+const isGradual = (report: string[]) => {
   let gradual = false;
 
   for (let i = 0; i < report.length - 1; i++) {
@@ -23,7 +23,7 @@ const isGradual: boolean = (report: string[]) => {
   return gradual;
 }
 
-const hasDups: boolean = (report: string[]) => {
+const hasDups = (report: string[]): boolean => {
   return report.length != new Set(report).size;
 }
 
