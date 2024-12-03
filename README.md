@@ -11,8 +11,8 @@
 
 <!--SOLUTIONS-->
 
-![Day](https://badgen.net/badge/01/%E2%98%85%E2%98%85/green)
-![Day](https://badgen.net/badge/02/%E2%98%85%E2%98%85/green)
+[![Day](https://badgen.net/badge/01/%E2%98%85%E2%98%85/green)](src/day01)
+[![Day](https://badgen.net/badge/02/%E2%98%85%E2%98%85/green)](src/day02)
 ![Day](https://badgen.net/badge/03/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/04/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/05/%E2%98%86%E2%98%86/gray)
@@ -69,16 +69,16 @@ pnpm start 1
 
 ```
 Day 01
-Time part 1: 0.69275
-Time part 2: 0.467959
-Both parts: 1.160709
+Time part 1: 0.693ms
+Time part 2: 0.468ms
+Both parts: 1.161ms
 ```
 
 ```
 Day 02
-Time part 1: 1.591833
-Time part 2: 18.907334
-Both parts: 20.499167
+Time part 1: 1.592ms
+Time part 2: 18.907ms
+Both parts: 20.499ms
 ```
 
 ```
@@ -243,9 +243,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 0
-4/50
-Total time: 0ms
+Total stars: 4/50
+Total time: 21.66ms
 ```
 
 <!--/RESULTS-->
