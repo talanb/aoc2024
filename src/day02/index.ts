@@ -27,19 +27,28 @@ const hasDups = (report: string[]): boolean => {
   return report.length != new Set(report).size;
 }
 
+const removeAtIndex = (arr: any[], index: number): any[] => {
+  if (index < 0 || index >= arr.length) {
+    throw new Error('Index out of bounds');
+  }
+  
+  return [...arr.slice(0, index), ...arr.slice(index + 1)];
+}
+
+const isSafe = (report: string[]): boolean => {
+  let safe = true;
+  if (hasDups(report) || !isReportSorted(report) || !isGradual(report)) {
+    safe = false;
+  }
+  return safe;
+}
+
 const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
   const lines: string[] = input.split('\n');
   const safeCnt = lines.reduce((acc: number, line: string) => {
     const report = line.split(' ');
-    if (hasDups(report)) {
-      return acc;
-    }
-    let gradual = false;
-    if (!isReportSorted(report)) {
-      return acc;
-    }
-    if (isGradual(report)) {
+    if (isSafe(report)) {
       acc += 1;
     }
     return acc;
@@ -48,14 +57,6 @@ const part1 = (rawInput: string) => {
   return safeCnt;
 };
 
-function removeAtIndex(arr: any[], index: number): any[] {
-  if (index < 0 || index >= arr.length) {
-    throw new Error('Index out of bounds');
-  }
-  
-  return [...arr.slice(0, index), ...arr.slice(index + 1)];
-}
-
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
   const lines: string[] = input.split('\n');
@@ -63,7 +64,7 @@ const part2 = (rawInput: string) => {
   const safeCnt = lines.reduce((acc: number, line: string) => {
     const report = line.split(' ');
     // Try the original input
-    if (!hasDups(report) && isReportSorted(report) && isGradual(report)) {
+    if (isSafe(report)) {
       acc += 1;
       return acc;
     }
@@ -71,11 +72,9 @@ const part2 = (rawInput: string) => {
     // Remove each level and try.
     for (let i = 0; i < report.length; i++) {
       const dampenedReport = removeAtIndex(report, i);
-      console.log(`  ${dampenedReport}`)
-      if (!hasDups(dampenedReport) && isReportSorted(dampenedReport) && isGradual(dampenedReport)) {
+      if (isSafe(dampenedReport)) {
         acc += 1;
         return acc;
-
       }
     }
     return acc;
