@@ -2,18 +2,18 @@ import run from "aocrunner";
 
 const parseInput = (rawInput: string) => rawInput;
 
-const isReportSorted = (report: string[]) : boolean => {
-  const ascending = report.slice(0).sort((a, b) => Number(a) - Number(b));
-  const descending = report.slice(0).sort((a, b) => Number(b) - Number(a));
+const isReportSorted = (report: number[]) : boolean => {
+  const ascending = report.slice(0).sort((a, b) => a - b);
+  const descending = report.slice(0).sort((a, b) => b - a);
 
   return ascending.join(',') === report.join(',') || descending.join(',') === report.join(',');
 }
 
-const isGradual = (report: string[]) => {
+const isGradual = (report: number[]) => {
   let gradual = false;
 
   for (let i = 0; i < report.length - 1; i++) {
-    const diff = Math.abs(Number(report[i])  - Number(report[i + 1]));
+    const diff = Math.abs(report[i]  - report[i + 1]);
     if (diff > 0 && diff <= 3) {
       gradual = true;
     } else {
@@ -23,7 +23,7 @@ const isGradual = (report: string[]) => {
   return gradual;
 }
 
-const hasDups = (report: string[]): boolean => {
+const hasDups = (report: number[]): boolean => {
   return report.length != new Set(report).size;
 }
 
@@ -35,7 +35,7 @@ const removeAtIndex = (arr: any[], index: number): any[] => {
   return [...arr.slice(0, index), ...arr.slice(index + 1)];
 }
 
-const isSafe = (report: string[]): boolean => {
+const isSafe = (report: number[]): boolean => {
   let safe = true;
   if (hasDups(report) || !isReportSorted(report) || !isGradual(report)) {
     safe = false;
@@ -47,7 +47,7 @@ const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
   const lines: string[] = input.split('\n');
   const safeCnt = lines.reduce((acc: number, line: string) => {
-    const report = line.split(' ');
+    const report = line.split(' ').map(n => Number(n));
     if (isSafe(report)) {
       acc += 1;
     }
@@ -62,7 +62,7 @@ const part2 = (rawInput: string) => {
   const lines: string[] = input.split('\n');
 
   const safeCnt = lines.reduce((acc: number, line: string) => {
-    const report = line.split(' ');
+    const report = line.split(' ').map(n => Number(n));
     // Try the original input
     if (isSafe(report)) {
       acc += 1;
